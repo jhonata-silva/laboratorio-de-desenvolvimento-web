@@ -1,0 +1,45 @@
+{% extends 'paginas/template.html' %}
+{% load static %}
+{% block titulo %}
+<title>Listar Salas</title>
+{% endblock %}
+{% block conteudo %}
+
+<h3>
+    Lista de Salas registrados
+    <a href="{% url 'cadastrar-sala' %}" class="btn btn-primary btn-sm float-right">
+        Adicionar Sala
+    </a>
+</h3>
+
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Sigla</th>
+            <th>Opções</th>
+        </tr>
+        {% for sala in object_list %}
+        <tr>
+            <td>{{ sala.nome }}</td>
+            <td>{{ sala.tipo }}</td>
+            <td>
+                <a href="{% url 'editar-sala' sala.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <i class='bx bx-edit-alt'></i>
+                </a>
+                <a href="{% url 'excluir-sala' sala.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                    <i class='bx bx-trash'></i>
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">
+                Nenhum campo registro.
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

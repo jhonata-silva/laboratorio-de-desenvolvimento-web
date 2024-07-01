@@ -1,0 +1,54 @@
+{% extends 'paginas/template.html' %}
+{% load static %}
+{% block titulo %}
+<title>Listar Cursos</title>
+{% endblock %}
+{% block conteudo %}
+
+<h3>
+    Lista de Cursos registrados
+    <a href="{% url 'cadastrar-curso' %}" class="btn btn-primary btn-sm float-right">
+        Adicionar curso
+    </a>
+</h3>
+
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Modalidade</th>
+            <th>Departamento</th>
+            <th>Opções</th>
+        </tr>
+        {% for curso in object_list %}
+        <tr>
+            <td>{{ curso.nome }}</td>
+            <td>{% if curso.modalidade == 'INT' %}
+                Integrado
+                {% elif curso.modalidade == 'SUB' %}
+                Subsequente
+                {% else %}
+                Concomitante
+                {% endif %}
+            </td>
+            <td>{{ curso.departamento.sigla }}</td>
+            <td>
+                <a href="{% url 'editar-curso' curso.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <i class='bx bx-edit-alt'></i>
+                </a>
+                <a href="{% url 'excluir-curso' curso.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                    <i class='bx bx-trash'></i>
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">
+                Nenhum campo registro.
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
