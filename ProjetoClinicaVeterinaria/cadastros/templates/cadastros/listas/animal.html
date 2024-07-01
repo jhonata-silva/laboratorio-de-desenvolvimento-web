@@ -1,0 +1,83 @@
+{% extends 'paginas/template.html' %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="script.js"></script>
+  
+{% load static %}
+{% block titulo %} <title>Lista de Animais</title>
+{% endblock %}
+{% block conteudo %} <h3>Lista de Animais registrados
+    <a href="{% url 'cadastrar-animal' %}" class="btn btn-primary btn-sm float-right">Adicionar animal</a>
+</h3>
+
+<hr>
+<div class="table-responsive">
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="." method="GET" class="form-inline">
+                <input type="text" id="search" name="search" class="form-control" placeholder="busca">
+                <input type="submit" class="btn btn-primary" style="margin-left: 10px;" value="OK">
+            </form>
+        </div>
+    </div>
+
+
+    <table class="table table-striped">
+
+        <tr>
+            <th>Nome</th>
+
+            <th>Espécie</th>
+
+            <th>Sexo</th>
+
+            <th>Proprietario</th>
+
+            <th>Opções</th>
+
+        </tr>
+        <tr>
+            <th><input type="text" id="nome"/></th>
+            <th><input type="text" id="especie"/></th>
+            <th><input type="text" id="sexo"/></th>
+            <th><input type="text" id="proprietario"/></th>
+        </tr>
+        {% for animal in object_list %} <tr>
+            <td>{{ animal.nome }}</td>
+            <td>
+                {% if animal.especie == '1' %}
+
+                Cachorro
+
+                {% else %}
+
+                Gato
+
+                {% endif %}
+
+            </td>
+            <td>{{ animal.sexo }}</td>
+            <td>{{ animal.proprietario.nome }}</td>
+            <td>
+
+                <a href="{% url 'editar-animal' animal.pk %}" class="btn btn-
+                warning btn-sm" title="Editar">Editar</a>
+
+                <a href="{% url 'excluir-animal' animal.pk %}" class="btn btn-
+                danger btn-sm" title="Excluir">Excluir</a>
+
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="3">
+                Nenhum campo registro.
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+{% block rodape %}
+{% endblock %}

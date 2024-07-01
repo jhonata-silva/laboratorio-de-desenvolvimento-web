@@ -1,0 +1,58 @@
+{% extends 'paginas/template.html' %}
+{% load static %}
+{% block titulo %} <title>Lista de Consultas Veterinarias</title>
+
+{% endblock %}
+{% block conteudo %} <h3>Lista de Consultas Veterinarias registrados
+    <a href="{% url 'marcar-consulta' %}" class="btn btn-primary btn-sm float-right">Adicionar consulta</a>
+</h3>
+
+<hr>
+<div class="table-responsive">
+
+    <table class="table table-striped">
+
+        <tr>
+            <th>Data</th>
+
+            <th>Animal</th>
+            
+            <th>Descrição</th>
+
+            <th>Opções</th>
+
+        </tr>
+        <tr>
+            <th><input type="text" id="data"/></th>
+            <th><input type="text" id="animal"/></th>
+            <th><input type="text" id="descricao"/></th>
+        </tr>
+        {% for consulta in object_list %} <tr>
+            <td>{{ consulta.data }}</td>
+            <td>{{ consulta.animal.nome }}</td>
+            <td>{{ consulta.descricao }}</td>
+            <td>
+
+                <a href="{% url 'editar-consulta' consulta.pk %}" class="btn btn-
+                warning btn-sm" title="Editar">Editar</a>
+
+                <a href="{% url 'excluir-consulta' consulta.pk %}" class="btn btn-
+                danger btn-sm" title="Excluir">Excluir</a>
+
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="3">
+                Nenhum campo registro.
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+
+{% block rodape %}
+{% endblock %}

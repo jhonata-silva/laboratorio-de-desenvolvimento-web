@@ -1,0 +1,50 @@
+{% extends 'paginas/template.html' %}
+{% load static %}
+{% block titulo %} <title>Lista de Veterinarios</title>
+
+{% endblock %}
+{% block conteudo %} <h3>Lista de Veterinarios registrados
+    <a href="{% url 'cadastrar-veterinario' %}" class="btn btn-primary btn-sm float-right">Adicionar veterinario</a>
+</h3>
+
+<hr>
+<div class="table-responsive">
+
+    <table class="table table-striped">
+
+        <tr>
+            <th>Nome</th>
+
+            <th>Crmv</th>
+            <th>Opções</th>
+
+        </tr>
+        {% for veterinario in object_list %} <tr>
+            <td>{{ veterinario.nome }}</td>
+            <td>{{ veterinario.crmv }}</td>
+
+            <td>
+
+                <a href="{% url 'editar-veterinario' veterinario.pk %}" class="btn btn-
+                warning btn-sm" title="Editar">Editar</a>
+
+                <a href="{% url 'excluir-veterinario' veterinario.pk %}" class="btn btn-
+                danger btn-sm" title="Excluir">Excluir</a>
+
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="3">
+                Nenhum campo registro.
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+
+{% block rodape %}
+{% endblock %}

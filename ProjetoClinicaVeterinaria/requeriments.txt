@@ -1,0 +1,13 @@
+asgiref==3.5.2
+autopep8==2.0.1
+distlib==0.3.6
+Django==4.1.4
+django-braces==1.15.0
+django-crispy-forms==1.14.0
+filelock==3.8.2
+platformdirs==2.6.0
+pycodestyle==2.10.0
+sqlparse==0.4.3
+tomli==2.0.1
+tzdata==2022.7
+virtualenv==20.17.1

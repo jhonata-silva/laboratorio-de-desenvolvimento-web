@@ -1,0 +1,54 @@
+{% extends 'paginas/template.html' %}
+{% load static %}
+{% block titulo %} <title>Lista de Proprietarios</title>
+
+{% endblock %}
+{% block conteudo %} <h3>Lista de Proprietario registrados
+    <a href="{% url 'cadastrar-proprietario' %}" class="btn btn-primary btn-sm float-right">Adicionar proprietario</a>
+</h3>
+
+<hr>
+<div class="table-responsive">
+
+    <table class="table table-striped">
+
+        <tr>
+            <th>Nome</th>
+
+            <th>Telefone</th>
+
+            <th>Opções</th>
+
+        </tr>
+        <tr>
+            <th><input type="text" id="nome"/></th>
+            <th><input type="text" id="telefone"/></th>
+        </tr>
+        {% for proprietario in object_list %} <tr>
+            <td>{{ proprietario.nome }}</td>
+            <td>{{ proprietario.telefone }}</td>
+            <td>
+
+                <a href="{% url 'editar-proprietario' proprietario.pk %}" class="btn btn-
+                warning btn-sm" title="Editar">Editar</a>
+
+                <a href="{% url 'excluir-proprietario' proprietario.pk %}" class="btn btn-
+                danger btn-sm" title="Excluir">Excluir</a>
+
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="3">
+                Nenhum campo registro.
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+
+{% block rodape %}
+{% endblock %}
